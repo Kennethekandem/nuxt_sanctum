@@ -39,15 +39,15 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://127.0.0.1:8000',
-    credential: true
+    baseURL: 'http://localhost:8000',
+    withCredentials: true
   },
 
   auth: {
     strategies: {
       'laravelSanctum': {
         provider: 'laravel/sanctum',
-        url: 'http://127.0.0.1:8000'
+        url: 'http://localhost:8000'
       }
     }
   },

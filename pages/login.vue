@@ -2,12 +2,12 @@
   <div>
     <form @submit.prevent="userLogin">
       <div>
-        <label>Username</label>
-        <input type="text" v-model="login.username" />
+        <label>Email</label>
+        <input type="email" v-model="email" />
       </div>
       <div>
         <label>Password</label>
-        <input type="text" v-model="login.password" />
+        <input type="text" v-model="password" />
       </div>
       <div>
         <button type="submit">Submit</button>
@@ -18,25 +18,29 @@
 
 <script>
   export default {
-    name: 'login',
 
     data() {
       return {
-        login: {
-          username: '',
-          password: ''
-        }
+        email: '',
+        password: ''
       }
     },
     methods: {
       async userLogin() {
-        await this.$axios.get('/sanctum/csrf-cookie', {
+        /*await this.$axios.get('/sanctum/csrf-cookie', {
           headers: {
             'X-Requested-With': 'XMLHttpRequest'
           },
-          withCredentials: true,
+          credential: true,
         }).then(response => {
           console.log(response);
+        })*/
+
+        await this.$auth.loginWith('laravelSanctum', {
+          data: {
+            email: this.email,
+            password: this.password
+          }
         })
       }
     }
